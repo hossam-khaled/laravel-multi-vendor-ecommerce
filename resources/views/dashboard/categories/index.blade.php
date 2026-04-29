@@ -6,6 +6,9 @@
         @if (session()->has('success'))
           <div class="alert alert-success" role="alert">{{ session('success')  }}</div>
         @endif
+        @if (session()->has('info'))
+          <div class="alert alert-info" role="alert">{{ session('info')  }}</div>
+        @endif
         <!-- Hoverable Table rows -->
         {{-- {{ $categories }} --}}
         <div class="card">
