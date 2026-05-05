@@ -90,7 +90,7 @@
                   </tr> --}}
                   @foreach ($categories as $category )
                       <tr>
-                        <td>{{ $category->id }}</td>
+                        <td>{{ $category->id }} <img src="{{ asset('storage/' . $category->image) }}" alt="{{ $category->name }}" width="100px" class="img-fluid"></td>
                         <td>{{ $category->name }}</td>
                         <td>{{ $category->parent_id }}</td>
                         <td>
