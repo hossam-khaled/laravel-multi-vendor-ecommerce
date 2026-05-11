@@ -21,4 +21,15 @@ class Category extends Model
         'slug',
         'parent_id'
     ];
+
+    public static function rules($id = 0)
+    {
+        return [
+            'name' => 'required|string|min:3|max:255|unique:categories,name,' . $id,
+            'parent_id' => 'nullable|int|exists:categories,id',
+            'image' => 'nullable|image|max:2048',
+            'description' => 'nullable|string',
+            'status' => 'required|in:active,inactive',
+        ];
+    }
 }

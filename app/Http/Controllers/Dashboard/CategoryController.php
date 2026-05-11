@@ -35,6 +35,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate(Category::rules());
         if ($request->hasFile('image')) {
             $request->merge([
                 'image' => $request->file('image')->store('categories', 'public'),
@@ -76,10 +77,12 @@ class CategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $request->validate(Category::rules($id));
+
         $request->merge([
             'slug' => Str::slug($request->input('name')),
         ]);
-        
+
         $category = Category::findOrFail($id);
         $old_image = $category->image;
 

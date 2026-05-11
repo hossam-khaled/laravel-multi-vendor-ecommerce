@@ -6,7 +6,7 @@
         <div class="col-xl">
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0">@yield('title')</h5>
+                    <h3 class="mb-0">@yield('title')</h3>
                     <small class="text-body float-end"><a href="{{ route('dashboard.categories.index') }}"> Category List</a></small>
                 </div>
                 <div class="card-body">
