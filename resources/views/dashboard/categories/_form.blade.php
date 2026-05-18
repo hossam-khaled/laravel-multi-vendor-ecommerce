@@ -9,12 +9,8 @@
     </div>
 @endif
 <div class="form-floating form-floating-outline mb-6">
-    <input type="text" @class(['form-control', 'is-invalid' => $errors->has('name')]) name="name" value="{{old('name', $category->name)}}" id="basic-default-fullname"
-        placeholder="John Doe" />
+    <x-form.input name="name" :value="$category->name" />
     <label for="basic-default-fullname">Category Name</label>
-    @error('name')
-        <div class="invalid-feedback">{{ $message }}</div>
-    @enderror
 </div>
 <div class="form-floating form-floating-outline mb-6">
     <select @class(['form-select', 'is-invalid' => $errors->has('parent_id')]) id="parentFormControlSelect1" name="parent_id" aria-label="Default select parent">

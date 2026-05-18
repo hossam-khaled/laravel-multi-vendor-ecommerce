@@ -66,6 +66,9 @@ class CategoryController extends Controller
     public function edit(string $id)
     {
         $category = Category::findOrFail($id);
+        if (!$category) {
+           return Redirect::route('dashboard.categories.index')->with('info', 'Category not found');
+       }   
         $categories = Category::where('id', '<>', $id)->where(function ($query) use ($id) {
             $query->whereNull('parent_id')->orWhere('parent_id', '<>', $id);
         })->get();
