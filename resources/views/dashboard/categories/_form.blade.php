@@ -9,22 +9,11 @@
     </div>
 @endif
 <div class="form-floating form-floating-outline mb-6">
-    <x-form.input name="name" :value="$category->name" />
-    <label for="basic-default-fullname">Category Name</label>
+    <x-form.input name="name" :value="$category->name" label="Category Name" />
 </div>
 <div class="form-floating form-floating-outline mb-6">
-    <select @class(['form-select', 'is-invalid' => $errors->has('parent_id')]) id="parentFormControlSelect1" name="parent_id" aria-label="Default select parent">
-        <option selected="selected" disabled>Open this select category</option>
-        @forelse($categories as $cat)
-            <option @selected(old('parent_id', $category->parent_id) == $cat->id) value="{{ $cat->id }}">{{ $cat->name }}</option>
-        @empty
-            <option value="" disabled selected>None</option>
-        @endforelse
-    </select>
-    @error('parent_id')
-        <div class="invalid-feedback">{{ $message }}</div>
-    @enderror
-    <label for="parentFormControlSelect1">Parent</label>
+    <x-form.select name="parent_id" :options="$categories->pluck('name', 'id')->toArray()" :checked="old('parent_id', $category->parent_id)" label="Parent" />
+ 
 </div>
 
 <div class="mb-4">
@@ -39,20 +28,10 @@
 </div>
 
 <div class="form-floating form-floating-outline mb-6">
-    <textarea @class(['form-control', 'is-invalid' => $errors->has('description')]) id="exampleFormControlTextarea1" name="description" rows="3"
-        placeholder="Description here...">{{ old('description', $category->description) }}</textarea>
-    <label for="exampleFormControlTextarea1">category description</label>
-    @error('description')
-        <div class="invalid-feedback">{{ $message }}</div>
-    @enderror
+    <x-form.textarea name="description" label="category description" >{{ old('description', $category->description) }}</x-form.textarea>
 </div>
-<div class="form-floating form-floating-outline mb-6">
-    <select @class(['form-select', 'is-invalid' => $errors->has('status')]) id="parentFormControlSelect1" name="status" aria-label="Default select parent">
-        <option selected="selected" disabled>Open this select status</option>
-        <option @if (old('status', $category->status) == 'active') selected="selected" @endif value="active">active</option>
-        <option @if (old('status', $category->status) == 'inactive') selected="selected" @endif value="inactive">in-active</option>
 
-    </select>
-    <label for="parentFormControlSelect1">status</label>
+<div class="form-floating form-floating-outline mb-6">
+    <x-form.select name="status" :checked="old('status', $category->status)" :options="['active' => 'Active', 'inactive' => 'Inactive']" label="Status" />
 </div>
 <button type="submit" class="btn btn-primary"><?php echo $button; ?> category</button>
