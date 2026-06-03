@@ -8,11 +8,17 @@
         <!-- Hoverable Table rows -->
         {{-- {{ $categories }} --}}
         <div class="card">
-            <div class="d-flex justify-content-between align-items-center">
-
-                <h5 class="card-header">Categories</h5>
-                <a href="{{ route('dashboard.categories.create') }}" class="btn btn-outline-primary waves-effect mx-2">create category</a>
-            </div>
+          <div class="d-flex justify-content-between align-items-center">
+            
+            <h5 class="card-header">Categories
+            </h5>
+            <a href="{{ route('dashboard.categories.create') }}" class="btn btn-outline-primary waves-effect mx-2">create category</a>
+          </div>
+          <form  class="d-flex m-2 justify-content-between mb-4" action="{{ URL::current() }}" method="get">
+            <x-form.input name="search" placeholder="Search" :value="request('search')"  class="mx-2"/>
+            <x-form.select class="me-2" name="status" :options="[''=>'All', 'active' => 'active', 'inactive' => 'inactive']" :value="request('status')" />
+            <button class="btn btn-outline-primary waves-effect" type="submit">Search</button>
+          </form>
             <div class="table-responsive text-nowrap">
               <table class="table table-hover">
                 <thead>
@@ -123,8 +129,10 @@
               </table>
             </div>
           </div>
+          <br />
+          {{ $categories->links() }}
           <!--/ Hoverable Table rows -->
-      </div>
+        </div>
       <!-- / Content -->
   @endsection
 
