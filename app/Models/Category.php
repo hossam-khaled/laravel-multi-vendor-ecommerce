@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Validation\Rule;
@@ -22,6 +23,22 @@ class Category extends Model
         'slug',
         'parent_id'
     ];
+
+    public function scopeActive(Builder $builder)
+    {
+        return $builder->where('status', 'active');
+    }
+
+    public function scopeFilter(Builder $builder, $filters)
+    {
+        return $builder
+            ->when($filters['search'] ?? false, function ($query, $search) {
+                $query->where('categories.name', 'like', '%' . $search . '%');
+            })
+            ->when($filters['status'] ?? false, function ($query, $status) {
+                $query->where('categories.status', $status);
+            });
+    }
 
     public static function rules($id = 0)
     {

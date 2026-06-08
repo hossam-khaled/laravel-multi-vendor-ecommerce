@@ -17,13 +17,10 @@ class CategoryController extends Controller
      */
     public function index( Request $request )
     {
-        $categories = Category::when($request->filled('search'), function ($query) use ($request) {
-            $query->where('name', 'like', '%' . $request->input('search') . '%');
-        })
-        ->when($request->filled('status'), function ($query) use ($request) {
-            $query->where('status', $request->input('status'));
-        })
-        ->paginate(3);
+        $categories = Category::leftJoin('categories as parent', 'categories.parent_id', '=', 'parent.id')
+            ->select(['categories.*', 'parent.name as parent_name'])
+            ->filter($request->query())->paginate(3);
+            // dd($categories);
         return view('dashboard.categories.index', compact('categories'));
     }
 
