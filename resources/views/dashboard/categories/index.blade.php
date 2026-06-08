@@ -12,7 +12,10 @@
             
             <h5 class="card-header">Categories
             </h5>
+            <div>
+            <a href="{{ route('dashboard.categories.trash') }}" class="btn btn-outline-danger waves-effect mx-2">Trash</a>
             <a href="{{ route('dashboard.categories.create') }}" class="btn btn-outline-primary waves-effect mx-2">create category</a>
+            </div>
           </div>
           <form  class="d-flex m-2 justify-content-between mb-4" action="{{ URL::current() }}" method="get">
             <x-form.input name="search" placeholder="Search" :value="request('search')"  class="mx-2"/>

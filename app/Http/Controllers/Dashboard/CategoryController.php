@@ -113,9 +113,46 @@ class CategoryController extends Controller
     {
         $category = Category::findOrFail($id);
         $category->delete();
-        if ($category->image) {
-            Storage::disk('public')->delete($category->image);
-        }
+        // if ($category->image) {
+        //     Storage::disk('public')->delete($category->image);
+        // }
         return Redirect::route('dashboard.categories.index')->with('success', 'Category deleted');
+    }
+
+    /**
+     * Display a listing of the trashed resource.
+     */
+    public function trash()
+    {
+        $categories = Category::onlyTrashed()->paginate(3);
+        return view('dashboard.categories.trash', compact('categories'));
+    }
+    /**
+     * Restore the specified resource from trash.
+     */
+    public function restore(string $id)
+    {
+        $category = Category::withTrashed()->findOrFail($id);
+        if ($category->trashed()) {
+            $category->restore();
+            return Redirect::route('dashboard.categories.index')->with('success', 'Category restored');
+        }
+        return Redirect::route('dashboard.categories.index')->with('info', 'Category is not in trash');
+    }
+
+    /**
+     * Force delete the specified resource from storage.
+     */
+    public function forceDelete(string $id)
+    {
+        $category = Category::withTrashed()->findOrFail($id);
+        if ($category->trashed()) {
+            if ($category->image) {
+                Storage::disk('public')->delete($category->image);
+            }
+            $category->forceDelete();
+            return Redirect::route('dashboard.categories.index')->with('success', 'Category permanently deleted');
+        }
+        return Redirect::route('dashboard.categories.index')->with('info', 'Category is not in trash');
     }
 }
