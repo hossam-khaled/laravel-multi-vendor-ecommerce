@@ -16,13 +16,13 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug')->unique();
             $table->text('description') ->nullable();
-            $table->string('address') ->nullable();
             $table->string('logo_image') ->nullable();
             $table->string('cover_image') ->nullable();
+            // $table->string('address') ->nullable();
             $table->enum('status', ['active', 'inactive'])->default('active');
             $table->string('phone')->nullable();
             $table->string('email')->nullable();
-            $table->string('website')->nullable();
+            // $table->string('website')->nullable();
             $table->timestamps();
         });
     }
