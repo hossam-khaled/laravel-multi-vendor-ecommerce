@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('product', function (Blueprint $table) {
+        Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->foreignId('store_id')->constrained('stores', 'id')->cascadeOnDelete();
             $table->foreignId('category_id')->nullable()->constrained('categories', 'id')->nullOnDelete();
@@ -26,8 +26,9 @@ return new class extends Migration
             $table->json('attributes')->nullable();
             $table->float('rating')->default(0);
             $table->boolean('featured')->default(false);
-            $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->enum('status', ['active','draft','inactive'])->default('active');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -36,6 +37,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('product');
+        Schema::dropIfExists('products');
     }
 };

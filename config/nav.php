@@ -14,15 +14,21 @@ return [
         'active' => 'dashboard.categories.*',
     ],
     [
+        'name' => 'Stores',
+        'route' => 'dashboard.stores.index',
+        'icon' => 'ri-store-3-fill',
+        'active' => 'dashboard.stores.*',
+    ],
+    [
         'name' => 'Products',
-        'route' => 'dashboard.categories.index',
-        'icon' => 'ri-table-alt-line',
+        'route' => 'dashboard.products.index',
+        'icon' => 'ri-product-hunt-line',
         'active' => 'dashboard.products.*',
     ],
     [
         'name' => 'Orders',
-        'route' => 'dashboard.categories.index',
+        'route' => 'dashboard.products.index',
         'icon' => 'ri-table-alt-line',
-        'active' => 'dashboard.orders.*',
-    ]
+        'active' => 'dashboard.products.*',
+    ],
 ];
