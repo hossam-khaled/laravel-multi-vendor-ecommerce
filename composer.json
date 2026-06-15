@@ -4,6 +4,22 @@
     "description": "The skeleton application for the Laravel framework.",
     "keywords": ["laravel", "framework"],
     "license": "MIT",
+    "repositories": [
+        {
+            "type": "path",
+            "url": "packages/faker-provider-collection",
+            "options": {
+                "symlink": true
+            }
+        },
+        {
+            "type": "path",
+            "url": "packages/laravel-faker-provider-collection",
+            "options": {
+                "symlink": true
+            }
+        }
+    ],
     "require": {
         "php": "^8.1",
         "guzzlehttp/guzzle": "^7.2",
@@ -12,6 +28,7 @@
         "laravel/tinker": "^2.8"
     },
     "require-dev": {
+        "mbezhanov/laravel-faker-provider-collection": "^3.2",
         "fakerphp/faker": "^1.9.1",
         "laravel/breeze": "^1.29",
         "laravel/pint": "^1.0",
@@ -60,7 +77,8 @@
         "allow-plugins": {
             "pestphp/pest-plugin": true,
             "php-http/discovery": true
-        }
+        },
+        "secure-http": true
     },
     "minimum-stability": "stable",
     "prefer-stable": true

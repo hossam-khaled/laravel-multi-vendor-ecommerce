@@ -20,7 +20,7 @@ class StoreFactory extends Factory
              $name = $this->faker->unique()->word();
         return [
             'name' => $name,
-            'slug' => Str::slug($name),
+            'slug' => Str::slug($name) . '-' . strtolower(Str::random(6)),
             'description' => $this->faker->sentence(),
             'logo_image' => $this->faker->imageUrl(300, 300, 'business'),
             'cover_image' => $this->faker->imageUrl(800, 400, 'business'),

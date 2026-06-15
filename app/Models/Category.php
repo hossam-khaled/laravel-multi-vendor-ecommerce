@@ -25,6 +25,11 @@ class Category extends Model
         'parent_id'
     ];
 
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+
     public function scopeActive(Builder $builder)
     {
         return $builder->where('status', 'active');

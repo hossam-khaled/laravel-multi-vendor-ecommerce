@@ -19,7 +19,7 @@ class CategoryController extends Controller
     {
         $categories = Category::leftJoin('categories as parent', 'categories.parent_id', '=', 'parent.id')
             ->select(['categories.*', 'parent.name as parent_name'])
-            ->filter($request->query())->paginate(3);
+            ->filter($request->query())->paginate(5);
             // dd($categories);
         return view('dashboard.categories.index', compact('categories'));
     }

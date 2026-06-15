@@ -17,10 +17,10 @@ class ProductFactory extends Factory
      */
     public function definition(): array
     {
-          $name = $this->faker->unique()->word();
-        return [
+        $name = $this->faker->productName();
+        return [        
             'name' => $name,
-            'slug' => Str::slug($name),
+            'slug' => Str::slug($name) . '-' . strtolower(Str::random(6)),
             'description' => $this->faker->sentence(),
             'image' => $this->faker->imageUrl(),
             'price' => $this->faker->randomFloat(2, 1, 100),

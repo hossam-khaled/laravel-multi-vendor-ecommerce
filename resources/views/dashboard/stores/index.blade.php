@@ -1,5 +1,5 @@
   @extends('layouts.dashboard')
-  @section('title', 'Categories')
+  @section('title', 'Stores')
   @section('content')
       <!-- Content -->
       <div class="container-xxl flex-grow-1 container-p-y">
@@ -10,11 +10,11 @@
         <div class="card">
           <div class="d-flex justify-content-between align-items-center">
             
-            <h5 class="card-header">Categories
+            <h5 class="card-header">Stores
             </h5>
             <div>
-            <a href="{{ route('dashboard.categories.trash') }}" class="btn btn-outline-danger waves-effect mx-2">Trash</a>
-            <a href="{{ route('dashboard.categories.create') }}" class="btn btn-outline-primary waves-effect mx-2">create category</a>
+            {{-- <a href="{{ route('dashboard.stores.trash') }}" class="btn btn-outline-danger waves-effect mx-2">Trash</a> --}}
+            <a href="{{ route('dashboard.stores.create') }}" class="btn btn-outline-primary waves-effect mx-2">create store</a>
             </div>
           </div>
           <form  class="d-flex m-2 justify-content-between mb-4" action="{{ URL::current() }}" method="get">
@@ -95,7 +95,7 @@
                   </tr> --}}
                   @if ($store->isEmpty())
                     <tr>
-                      <td colspan="6" class="text-center">No categories found.</td>
+                      <td colspan="6" class="text-center">No stores found.</td>
                     </tr>
                   
                   @endif
@@ -117,11 +117,11 @@
                               <i class="icon-base ri ri-more-2-line icon-18px"></i>
                             </button>
                             <div class="dropdown-menu">
-                              <a class="dropdown-item" href="{{ route('dashboard.categories.edit',[$category->id]) }}">
+                              <a class="dropdown-item" href="{{ route('dashboard.stores.edit',[$category->id]) }}">
                                 <i class="icon-base ri ri-pencil-line icon-18px me-1"></i>
                                 Edit</a
                               >
-                              <form action="{{ route('dashboard.categories.destroy', [$category->id]) }}" method="post">
+                              <form action="{{ route('dashboard.stores.destroy', [$category->id]) }}" method="post">
                                 @csrf
                                 @method('delete')
                                 <button type="submit" class="dropdown-item" href="javascript:void(0);">

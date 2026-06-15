@@ -13,8 +13,8 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        $product = Product::paginate(10);
-        return view('dashboard.products.index', compact('product'));
+        $products = Product::paginate(25);
+        return view('dashboard.products.index', compact('products'));
     }
 
     /**
@@ -30,7 +30,6 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        //
     }
 
     /**
@@ -38,7 +37,8 @@ class ProductsController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $product = Product::findOrFail($id);
+        // return view('dashboard.products.show', compact('product'));
     }
 
     /**
@@ -46,7 +46,7 @@ class ProductsController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $product = Product::findOrFail($id);
     }
 
     /**
@@ -54,7 +54,7 @@ class ProductsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $product = Product::findOrFail($id);
     }
 
     /**

@@ -1,20 +1,20 @@
   @extends('layouts.dashboard')
-  @section('title', 'Categories')
+  @section('title', 'Products')
   @section('content')
       <!-- Content -->
       <div class="container-xxl flex-grow-1 container-p-y">
         <x-alert type="success" />
         <x-alert type="info" />
         <!-- Hoverable Table rows -->
-        {{-- {{ $product }} --}}
+        {{-- {{ $products }} --}}
         <div class="card">
           <div class="d-flex justify-content-between align-items-center">
             
-            <h5 class="card-header">Categories
+            <h5 class="card-header">Products
             </h5>
             <div>
-            <a href="{{ route('dashboard.categories.trash') }}" class="btn btn-outline-danger waves-effect mx-2">Trash</a>
-            <a href="{{ route('dashboard.categories.create') }}" class="btn btn-outline-primary waves-effect mx-2">create category</a>
+            {{-- <a href="{{ //route('dashboard.products.trash') }}" class="btn btn-outline-danger waves-effect mx-2">Trash</a> --}}
+            <a href="{{ route('dashboard.products.create') }}" class="btn btn-outline-primary waves-effect mx-2">create product</a>
             </div>
           </div>
           <form  class="d-flex m-2 justify-content-between mb-4" action="{{ URL::current() }}" method="get">
@@ -28,7 +28,8 @@
                   <tr>
                     <th>#</th>
                     <th>Name</th>
-                    <th>Parent</th>
+                    <th>category Name</th>
+                    <th>Store Name</th>
                     <th>Status</th>
                     <th>created_at</th>
                     <th>Actions</th>
@@ -93,21 +94,22 @@
                       </div>
                     </td>
                   </tr> --}}
-                  @if ($product->isEmpty())
+                  @if ($products->isEmpty())
                     <tr>
-                      <td colspan="6" class="text-center">No categories found.</td>
+                      <td colspan="6" class="text-center">No products found.</td>
                     </tr>
                   
                   @endif
-                  @foreach ($product as $category )
+                  @foreach ($products as $product )
                       <tr>
-                        <td>{{ $category->id }} <img src="{{ asset('storage/' . $category->image) }}" alt="{{ $category->name }}" width="100px" class="img-fluid"></td>
-                        <td>{{ $category->name }}</td>
-                        <td>{{ $category->parent_name }}</td>
+                        <td>{{ $product->id }} <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" width="100px" class="img-fluid"></td>
+                        <td>{{ $product->name }}</td>
+                        <td><span class="badge rounded-pill">{{ $product->category->name ?? 'No Category' }}</span></td>
+                        <td><span class="badge rounded-pill bg-label-info">{{ $product->store->name ?? 'No Store' }}</span></td>
                         <td>
-                            <span class="badge rounded-pill {{ $category->status == 'active' ? 'bg-label-success' : 'bg-label-danger' }}  me-1">{{ $category->status }}</span>
+                            <span class="badge rounded-pill {{ $product->status == 'active' ? 'bg-label-success' : 'bg-label-danger' }}  me-1">{{ $product->status }}</span>
                         </td>
-                        <td>{{ $category->created_at }}</td>
+                        <td>{{ $product->created_at }}</td>
 
                         <td><div class="dropdown">
                             <button
@@ -117,11 +119,11 @@
                               <i class="icon-base ri ri-more-2-line icon-18px"></i>
                             </button>
                             <div class="dropdown-menu">
-                              <a class="dropdown-item" href="{{ route('dashboard.categories.edit',[$category->id]) }}">
+                              <a class="dropdown-item" href="{{ route('dashboard.products.edit',[$product->id]) }}">
                                 <i class="icon-base ri ri-pencil-line icon-18px me-1"></i>
                                 Edit</a
                               >
-                              <form action="{{ route('dashboard.categories.destroy', [$category->id]) }}" method="post">
+                              <form action="{{ route('dashboard.products.destroy', [$product->id]) }}" method="post">
                                 @csrf
                                 @method('delete')
                                 <button type="submit" class="dropdown-item" href="javascript:void(0);">
@@ -139,7 +141,7 @@
             </div>
           </div>
           <br />
-          {{ $product->withQueryString()->links() }}
+          {{ $products->withQueryString()->links() }}
           <!--/ Hoverable Table rows -->
         </div>
       <!-- / Content -->
