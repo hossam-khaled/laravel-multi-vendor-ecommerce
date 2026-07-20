@@ -12,6 +12,13 @@
 | [03-frontend-tasks.md](03-frontend-tasks.md) | مهام مطور Frontend بالتفصيل | مطور Frontend |
 | [04-team-management.md](04-team-management.md) | دليل إدارة الفريق: سير العمل، Git، الاجتماعات، المتابعة، الجودة | مدير المشروع + الفريق كامل |
 
+## نسخ قابلة للمشاركة (Word / PDF)
+
+في مجلد [exports/](exports/):
+
+- [00-project-management-plan.docx](exports/00-project-management-plan.docx) — نسخة Word من الخطة الشاملة (RTL).
+- [00-project-management-plan.pdf](exports/00-project-management-plan.pdf) — نسخة PDF من الخطة الشاملة (RTL).
+
 ## ملخص سريع
 
 - **الفريق:** مصمم UI/UX + مطور Backend (Laravel) + مطور Frontend + أنت (مدير المشروع / مالك المنتج).
