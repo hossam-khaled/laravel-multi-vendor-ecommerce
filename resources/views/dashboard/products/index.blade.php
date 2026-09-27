@@ -9,7 +9,7 @@
         {{-- {{ $products }} --}}
         <div class="card">
           <div class="d-flex justify-content-between align-items-center">
-            
+
             <h5 class="card-header">Products
             </h5>
             <div>
@@ -98,7 +98,7 @@
                     <tr>
                       <td colspan="6" class="text-center">No products found.</td>
                     </tr>
-                  
+
                   @endif
                   @foreach ($products as $product )
                       <tr>
