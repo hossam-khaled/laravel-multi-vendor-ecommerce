@@ -29,6 +29,16 @@ class Category extends Model
     {
         return $this->hasMany(Product::class);
     }
+    public function parent()
+    {
+        return $this->belongsTo(Category::class, 'parent_id','id')->withDefault([
+            'name' => '_',
+        ]);
+    }
+    public function children()
+    {
+        return $this->hasMany(Category::class, 'parent_id','id');
+    }
 
     public function scopeActive(Builder $builder)
     {

@@ -29,6 +29,7 @@
                     <th>#</th>
                     <th>Name</th>
                     <th>Parent</th>
+                    <th>count</th>
                     <th>Status</th>
                     <th>created_at</th>
                     <th>Actions</th>
@@ -95,15 +96,16 @@
                   </tr> --}}
                   @if ($categories->isEmpty())
                     <tr>
-                      <td colspan="6" class="text-center">No categories found.</td>
+                      <td colspan="9" class="text-center">No categories found.</td>
                     </tr>
                   
                   @endif
                   @foreach ($categories as $category )
                       <tr>
                         <td>{{ $category->id }} <img src="{{ asset('storage/' . $category->image) }}" alt="{{ $category->name }}" width="100px" class="img-fluid"></td>
-                        <td>{{ $category->name }}</td>
-                        <td>{{ $category->parent_name }}</td>
+                        <td><a href="{{ route('dashboard.categories.show', [$category->id]) }}">{{ $category->name }}</a></td>
+                        <td>{{ $category->parent->name }}</td>
+                        <td>{{ $category->products_count }}</td>
                         <td>
                             <span class="badge rounded-pill {{ $category->status == 'active' ? 'bg-label-success' : 'bg-label-danger' }}  me-1">{{ $category->status }}</span>
                         </td>
